@@ -5,7 +5,7 @@ import { Database, Tables } from "@/utils/supabase/types";
 import { redirect, RedirectType } from "next/navigation";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import { s3Client } from "@/lib/s3";
-import { spClient } from "@/utils/supabase/client";
+import { spBrowser } from "@/utils/supabase/client";
 
 export interface GetPostReturnType {
   post: Tables<"posts"> | null;
@@ -19,7 +19,7 @@ interface GetSinglePostParams {
 
 export async function getSinglePost({ filters }: GetSinglePostParams = {}): Promise<GetPostReturnType> {
   try {
-    const supabase = spClient();
+    const supabase = spBrowser();
     let query: any = supabase
       .from("posts")
       .select("*")
@@ -98,7 +98,7 @@ export async function getPaginatedPosts({
   const start = (page - 1) * limit;
   const end = start + limit - 1;
 
-  let query = spClient()
+  let query = spBrowser()
     .from("posts")
     .select("*", { count: "exact" });
 

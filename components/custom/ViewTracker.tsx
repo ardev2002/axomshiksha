@@ -5,7 +5,7 @@ import { createClient } from "@/utils/supabase/server";
 export default async function ViewTracker({
   postId
 }: {
-  postId: number;
+  postId: number
 }) {
   const ip = await getVisitorIP();
   const ipHash = hashIP(ip);

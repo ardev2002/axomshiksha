@@ -1,7 +1,7 @@
-import { createClient } from "@supabase/supabase-js";
 import { Database } from "./types";
-export function spClient() {
-  return createClient<Database>(
+import { createBrowserClient } from "@supabase/ssr";
+export function spBrowser() {
+  return createBrowserClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );

@@ -44,7 +44,7 @@ export type Database = {
           authorId: string
           chapter_no: number | null
           class: Database["public"]["Enums"]["Class"] | null
-          content_key: string | null
+          content_key: string
           created_at: string
           desc: string
           id: number
@@ -61,7 +61,7 @@ export type Database = {
           authorId: string
           chapter_no?: number | null
           class?: Database["public"]["Enums"]["Class"] | null
-          content_key?: string | null
+          content_key: string
           created_at?: string
           desc: string
           id?: number
@@ -78,7 +78,7 @@ export type Database = {
           authorId?: string
           chapter_no?: number | null
           class?: Database["public"]["Enums"]["Class"] | null
-          content_key?: string | null
+          content_key?: string
           created_at?: string
           desc?: string
           id?: number
