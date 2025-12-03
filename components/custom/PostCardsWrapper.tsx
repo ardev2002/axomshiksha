@@ -1,19 +1,14 @@
 import { getPaginatedPosts } from "@/utils/post/get/action";
 import PostCard from "./PostCard";
 import PaginationControls from "./PaginationControls";
-export default async function PostCardsWrapper({
-  pagePromise,
-}: {
-  pagePromise: Promise<string | string[] | undefined>;
-}) {
-  const page = Number(await pagePromise) || 1;
+import { Suspense } from "react";
+export default async function PostCardsWrapper() {
   const { posts, currentPage, totalPages } = await getPaginatedPosts({
-    page,
     filters: { status: "published" },
   });
-  
+
   return (
-    <>
+    <div>
       {posts.length == 0 ? (
         <p className="text-center text-muted-foreground mt-20">
           No posts found.
@@ -25,7 +20,9 @@ export default async function PostCardsWrapper({
           ))}
         </div>
       )}
-      <PaginationControls currentPage={currentPage} totalPages={totalPages} />
-    </>
+      <Suspense fallback={null}>
+        <PaginationControls currentPage={currentPage} totalPages={totalPages} />
+      </Suspense>
+    </div>
   );
 }

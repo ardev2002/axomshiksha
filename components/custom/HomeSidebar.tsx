@@ -1,19 +1,12 @@
-"use client";
-
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { useState } from "react";
 import { Facebook, Twitter, Instagram } from "lucide-react";
 
 // Define the type for trending posts
 
-
-
 export default function ClientSidebar() {
-  const [email, setEmail] = useState("");
-
   const categories = [
     "Technology",
     "Programming",
@@ -22,6 +15,12 @@ export default function ClientSidebar() {
     "Health",
     "Lifestyle",
   ];
+
+  const formAction = async (formData: FormData) => {
+    "use server";
+    const email = formData.get("email") as string;
+    console.log(email);
+  };
 
   return (
     <>
@@ -55,14 +54,12 @@ export default function ClientSidebar() {
           <p className="text-sm text-muted-foreground mb-3">
             Stay updated with our latest articles.
           </p>
-          <div className="flex gap-2">
-            <Input
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <Button>Subscribe</Button>
-          </div>
+          <form action={formAction} className="flex gap-2">
+            <Input placeholder="Enter your email" name="email" />
+            <Button className="hover:cursor-pointer" type="submit" size="sm">
+              Subscribe
+            </Button>
+          </form>
         </CardContent>
       </Card>
 

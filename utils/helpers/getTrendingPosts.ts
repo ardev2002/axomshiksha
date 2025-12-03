@@ -1,5 +1,6 @@
 import "server-only";
-import { createClient } from "@/utils/supabase/server";
+import { spBrowser } from "../supabase/client";
+import { cacheTag } from "next/cache";
 
 interface TrendingPost {
   id: number;
@@ -10,9 +11,9 @@ interface TrendingPost {
 }
 
 export async function getTrendingPosts(limit: number = 5): Promise<TrendingPost[]> {
-  const supabase = await createClient();
-
-  const { data: posts, error } = await supabase
+  "use cache";
+  cacheTag("posts");
+  const { data: posts, error } = await spBrowser()
     .from("posts")
     .select("id, title, url, views")
     .eq("status", "published")

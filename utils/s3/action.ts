@@ -1,7 +1,12 @@
 "use server";
 import { s3Client } from "@/lib/s3";
-import { DeleteObjectCommand, GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
+import {
+  DeleteObjectCommand,
+  GetObjectCommand,
+  PutObjectCommand,
+} from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { cacheTag } from "next/cache";
 
 export async function uploadToPresignedUrl(url: string, file: File) {
   const res = await fetch(url, {
@@ -16,12 +21,10 @@ export async function uploadToPresignedUrl(url: string, file: File) {
   return { message: "Image uploaded successfully" };
 }
 
-export async function removeImageFromS3(
-  Key: string
-) {
+export async function removeImageFromS3(Key: string) {
   const command = new DeleteObjectCommand({
     Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME,
-    Key
+    Key,
   });
 
   try {
@@ -32,36 +35,34 @@ export async function removeImageFromS3(
   }
 }
 
-export async function removeMultipleImagesFromS3(
-  Keys: string[]
-) {
+export async function removeMultipleImagesFromS3(Keys: string[]) {
   const results = await Promise.allSettled(
-    Keys.map(Key => removeImageFromS3(Key))
+    Keys.map((Key) => removeImageFromS3(Key))
   );
-  
+
   const errors = results
     .map((result, index) => ({ result, index }))
     .filter(({ result }) => result.status === "rejected")
     .map(({ index }) => Keys[index]);
-    
+
   if (errors.length > 0) {
     console.error("Failed to remove some images:", errors);
     throw new Error(`Failed to remove ${errors.length} images`);
   }
-  
+
   return { message: "Images removed successfully" };
 }
 
 export async function getSignedUrlForUpload(
   fileName: string,
   ContentType: string,
-  imgType: "block" | "thumbnail",
+  imgType: "block" | "thumbnail"
 ) {
   const Key = `post/${imgType}/${Date.now()}-${fileName}`;
   const command = new PutObjectCommand({
     Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME,
     Key,
-    ContentType
+    ContentType,
   });
   try {
     const signedUrl = await getSignedUrl(s3Client, command, {
@@ -75,11 +76,13 @@ export async function getSignedUrlForUpload(
 
 // Added function to generate signed URL for downloading/retrieving objects from S3
 export async function getSignedUrlForDownload(Key: string) {
+  "use cache";
+  cacheTag("posts");
   const command = new GetObjectCommand({
     Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME,
     Key,
   });
-  
+
   try {
     const signedUrl = await getSignedUrl(s3Client, command, {
       expiresIn: 3600,

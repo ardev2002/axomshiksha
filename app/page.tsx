@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Suspense } from "react";
 
-export default function HomePage({ searchParams }: PageProps<"/">) {
+export default function HomePage() {
   return (
     <>
       {/* Refined Hero Section with Gradient */}
@@ -58,14 +58,7 @@ export default function HomePage({ searchParams }: PageProps<"/">) {
 
       {/* Main Content: Posts + Sidebar */}
       <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10">
-        {/* Left: Posts */}
-        <div>
-          <Suspense fallback={<PostCardSkeleton />}>
-            <PostCardsWrapper
-              pagePromise={searchParams.then((sp) => sp.page)}
-            />
-          </Suspense>
-        </div>
+        <PostCardsWrapper />
 
         {/* Right: Sidebar */}
         <aside className="lg:sticky lg:top-20 lg:self-start">

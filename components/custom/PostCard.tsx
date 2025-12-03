@@ -15,7 +15,6 @@ export default async function PostCard({ post }: { post: Tables<"posts"> }) {
   return (
     <Link href={`/${post.url}`} className="block h-full">
       <div className="border border-border dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 bg-background flex flex-col h-full">
-        {/* Thumbnail with AspectRatio */}
         {post.thumbnail && (
           <AspectRatio ratio={16 / 8} className="overflow-hidden">
             <Image
