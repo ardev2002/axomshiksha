@@ -1,4 +1,3 @@
-// app/[...slug]/page.tsx
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote-client/rsc";
@@ -10,15 +9,17 @@ import PostMetaDate from "@/components/custom/PostMetaDate";
 import ViewTracker from "@/components/custom/ViewTracker";
 import { loadPost } from "./_data";
 
-export default function PostPage({
-  params,
-}: PageProps<"/[...slug]">) {
-  // params is a Promise when cacheComponents is enabled.
-  // We transform it into a Promise<string> for the full slug.
+export default function PostPage({ params }: PageProps<"/[...slug]">) {
   const slugPromise = params.then((p) => p.slug.join("/"));
 
   return (
-    <Suspense fallback={<div className="py-10 text-center text-sm text-muted-foreground">Loading post...</div>}>
+    <Suspense
+      fallback={
+        <div className="py-10 text-center text-sm text-muted-foreground">
+          Loading post...
+        </div>
+      }
+    >
       <PostPageInner slugPromise={slugPromise} />
     </Suspense>
   );
@@ -66,9 +67,7 @@ async function PostPageInner({
 
         {data.description && (
           <div className="border-l-4 border-primary/50 pl-4 py-2 rounded-l-lg">
-            <p className="text-muted-foreground italic">
-              {data.description}
-            </p>
+            <p className="text-muted-foreground italic">{data.description}</p>
           </div>
         )}
       </header>

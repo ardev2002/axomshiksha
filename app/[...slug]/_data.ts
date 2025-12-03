@@ -1,4 +1,4 @@
-"use cache: remote";
+"use cache";
 
 import { supabaseStatic } from "@/utils/supabase/server";
 import { s3Client } from "@/lib/s3";

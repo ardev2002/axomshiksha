@@ -13,53 +13,43 @@ export default async function PostCard({ post }: { post: Tables<"posts"> }) {
   );
 
   return (
-    <div className="border border-border dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 bg-background flex flex-col">
-      
-      {/* Thumbnail with AspectRatio */}
-      {post.thumbnail && (
-        <AspectRatio ratio={16 / 8} className="overflow-hidden">
-          <Image
-            src={signedUrl}
-            alt={post.title}
-            fill
-            className="object-cover group-hover:scale-105 transition-transform duration-300"
-          />
-        </AspectRatio>
-      )}
+    <Link href={`/${post.url}`} className="block h-full">
+      <div className="border border-border dark:border-gray-800 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 bg-background flex flex-col h-full">
+        {/* Thumbnail with AspectRatio */}
+        {post.thumbnail && (
+          <AspectRatio ratio={16 / 8} className="overflow-hidden">
+            <Image
+              src={signedUrl}
+              alt={post.title}
+              fill
+              className="object-cover"
+            />
+          </AspectRatio>
+        )}
 
-      {/* Content */}
-      <div className="flex flex-col p-3 gap-2 flex-1">
-        
-        {/* Meta */}
-        <div className="flex justify-between items-center text-[10px] text-muted-foreground">
-          <span className="px-1.5 py-0.5 rounded border border-gray-300 dark:border-gray-700">
-            Class {post.class}
-          </span>
-          <PostMetaDate date={post.created_at} />
-        </div>
+        {/* Content */}
+        <div className="flex flex-col p-4 gap-3 flex-1">
+          {/* Meta */}
+          <div className="flex justify-between items-center text-xs text-muted-foreground">
+            <span className="px-2 py-1 rounded border border-gray-300 dark:border-gray-700">
+              Class {post.class}
+            </span>
+            <PostMetaDate date={post.created_at} />
+          </div>
 
-        {/* Title */}
-        <Link href={`/${post.url}`}>
-          <h3 className="text-sm font-semibold leading-tight line-clamp-2 hover:text-primary transition-colors">
+          {/* Title */}
+          <h3 className="text-lg font-semibold leading-tight hover:text-primary transition-colors line-clamp-2">
             {post.title}
           </h3>
-        </Link>
 
-        {/* Description */}
-        <p className="text-xs text-muted-foreground line-clamp-2 leading-snug">
-          {post.desc}
-        </p>
-
-        {/* Read more */}
-        <div className="mt-auto flex justify-end">
-          <Link
-            href={`/${post.url}`}
-            className="text-[11px] text-primary hover:underline"
-          >
-            Read more →
-          </Link>
+          {/* Read more */}
+          <div className="mt-auto flex justify-end">
+            <span className="text-sm text-primary hover:underline">
+              Read more →
+            </span>
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
