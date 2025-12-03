@@ -6,7 +6,7 @@ import {
   Paragraph,
   CodeBlock,
   ListGroupItem,
-} from "@/app/dashboard/posts/components/sectionTypes";
+} from "@/utils/types";
 import { removeWhiteSpaces } from "@/utils/helpers/removeWhiteSpaces";
 
 function convertSectionsBodyToMDX(sections: Section[]): string {
