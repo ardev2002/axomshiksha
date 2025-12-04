@@ -35,16 +35,16 @@ export default function FAQPage() {
 
   const faqs = [
     {
-      question: "What is GyanRexa?",
-      answer: "GyanRexa is a platform designed to provide high-quality knowledge, insights, and educational content to learners of all levels."
+      question: "What is AxomShiksha?",
+      answer: "AxomShiksha is an educational platform in Assam designed to provide high-quality knowledge, insights, and educational content to learners of all levels."
     },
     {
-      question: "Is GyanRexa free to use?",
+      question: "Is AxomShiksha free to use?",
       answer: "Yes, most of our content is free. Premium features may be added in the future."
     },
     {
       question: "How do I contact support?",
-      answer: "You can reach us anytime at contact@gyanrexa.com."
+      answer: "You can reach us anytime at contact@axomshiksha.com."
     },
     {
       question: "Will you add more categories or subjects?",

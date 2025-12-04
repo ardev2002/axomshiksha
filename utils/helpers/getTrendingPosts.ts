@@ -1,6 +1,5 @@
 import "server-only";
 import { spBrowser } from "../supabase/client";
-import { cacheTag } from "next/cache";
 
 interface TrendingPost {
   id: number;
@@ -10,9 +9,13 @@ interface TrendingPost {
   score: number;
 }
 
+/**
+ * Get trending published posts from the database
+ * @param limit - The number of posts to return
+ * @returns {TrendingPost[]}
+ */
 export async function getTrendingPosts(limit: number = 5): Promise<TrendingPost[]> {
   "use cache";
-  cacheTag("posts");
   const { data: posts, error } = await spBrowser()
     .from("posts")
     .select("id, title, url, views")
@@ -21,7 +24,6 @@ export async function getTrendingPosts(limit: number = 5): Promise<TrendingPost[
     .limit(limit * 2);
 
   if (error) {
-    console.error("Error fetching trending posts:", error);
     return [];
   }
 
