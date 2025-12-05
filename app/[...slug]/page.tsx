@@ -7,6 +7,7 @@ import Image from "next/image";
 import { useMDXComponents } from "@/mdx-components";
 import PostMetaDate from "@/components/custom/PostMetaDate";
 import ViewTracker from "@/components/custom/ViewTracker";
+import { PostDetailSkeleton } from "@/components/custom/PostDetailSkeleton";
 import { loadPost } from "./_data";
 
 export default function PostPage({ params }: PageProps<"/[...slug]">) {
@@ -14,11 +15,7 @@ export default function PostPage({ params }: PageProps<"/[...slug]">) {
 
   return (
     <Suspense
-      fallback={
-        <div className="py-10 text-center text-sm text-muted-foreground">
-          Loading post...
-        </div>
-      }
+      fallback={<PostDetailSkeleton />}
     >
       <PostPageInner slugPromise={slugPromise} />
     </Suspense>

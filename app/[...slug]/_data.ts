@@ -5,8 +5,9 @@ import { s3Client } from "@/lib/s3";
 import { GetObjectCommand } from "@aws-sdk/client-s3";
 import matter from "gray-matter";
 import { getSignedUrlForDownload } from "@/utils/s3/action";
+import { cache } from "react";
 
-export async function loadPost(fullSlugPath: string) {
+export const loadPost = cache(async (fullSlugPath: string) => {
   const { data: post } = await supabaseStatic
     .from("posts")
     .select("*")
@@ -32,4 +33,4 @@ export async function loadPost(fullSlugPath: string) {
   );
 
   return { post, data, mdxContent, signedUrl };
-}
+})
