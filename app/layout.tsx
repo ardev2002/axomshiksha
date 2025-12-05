@@ -6,7 +6,7 @@ import { Toaster } from "@/components/custom/Toaster";
 import Footer from "@/components/custom/Footer";
 import CookieConsent from "@/components/custom/CookieConsent";
 import Script from "next/script";
-import AnalyticsLoader from "@/components/custom/AnalyticsLoader";
+import { GoogleAnalytics } from '@next/third-parties/google'
 export const metadata: Metadata = {
   title: "AxomShiksha - Study Materials, Notes & Learning Resources",
   description:
@@ -37,7 +37,7 @@ export default async function RootLayout({
           <Toaster position="bottom-center" />
         </ThemeProvider>
         <CookieConsent />
-        <AnalyticsLoader />
+        <GoogleAnalytics gaId="G-D5TGEJCED7"/>
       </body>
     </html>
   );
