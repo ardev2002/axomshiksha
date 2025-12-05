@@ -1,5 +1,5 @@
 "use server";
-import { Tables } from "@/utils/supabase/types";
+import { Database, Tables } from "@/utils/supabase/types";
 import { spBrowser } from "@/utils/supabase/client";
 import { cacheTag } from "next/cache";
 
@@ -78,4 +78,16 @@ export async function getPaginatedPosts({
     totalPages,
     currentPage: page,
   };
+}
+
+export async function getPostsBySubject(subject: Database["public"]["Enums"]["Subject"], page: number) {
+  const data = await getPaginatedPosts({
+    page,
+    filters: {
+      subject,
+      status: "published",
+    },
+  });
+
+  return data;
 }

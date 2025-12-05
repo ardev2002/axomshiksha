@@ -1,19 +1,11 @@
-import { Mail, Phone, MapPin, Send, User, Clock } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import * as motion from "motion/react-client";
 import type { Variants } from "motion/react";
-
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-  InputGroupTextarea,
-} from "@/components/ui/input-group";
-import { Label } from "@/components/ui/label";
 
 // Animation variants
 const container: Variants = {
   hidden: { opacity: 0 },
-  show: { opacity: 1, transition: { staggerChildren: 0.1 } },
+  show: { opacity: 1, transition: { staggerChildren: 0.15 } },
 };
 
 const item: Variants = {
@@ -29,23 +21,20 @@ const iconVariants: Variants = {
 // -------- SERVER ACTION --------
 async function action(formData: FormData) {
   "use server";
-
-  const name = String(formData.get("name") ?? "");
-  const email = String(formData.get("email") ?? "");
-  const message = String(formData.get("message") ?? "");
 }
 
-export default async function ContactPage() {
+export default function ContactPage() {
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
+    <div className="max-w-5xl mx-auto px-6 py-14">
+      {/* Page Title */}
       <motion.div
-        className="text-center mb-12"
+        className="text-center mb-14"
         initial="hidden"
         whileInView="show"
         variants={item}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true }}
       >
-        <h1 className="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+        <h1 className="text-4xl font-bold tracking-tight mb-3">
           Contact Us
         </h1>
         <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -53,154 +42,75 @@ export default async function ContactPage() {
         </p>
       </motion.div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-        {/* LEFT SIDE CONTACT BLOCKS */}
-        <motion.div
-          className="space-y-6"
-          initial="hidden"
-          whileInView="show"
-          variants={container}
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          {/* Email */}
+      {/* Contact Cards */}
+      <motion.div
+        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+        initial="hidden"
+        whileInView="show"
+        variants={container}
+        viewport={{ once: true }}
+      >
+        {[
+          {
+            icon: <Mail className="w-6 h-6" />,
+            title: "Email Us",
+            desc: "We are happy to help you anytime.",
+            link: { label: "shikshaaxom@gmail.com", href: "mailto:shikshaaxom@gmail.com" },
+          },
+          {
+            icon: <Phone className="w-6 h-6" />,
+            title: "Call Us",
+            desc: "Reach out for quick support.",
+            link: { label: "+91 9954765021", href: "tel:+919954765021" },
+          },
+          {
+            icon: <MapPin className="w-6 h-6" />,
+            title: "Visit Us",
+            desc: "Our physical office location.",
+            address: <>Axomshiksha Learning Center <br />Goreswar, Assam</>,
+          },
+        ].map((block, i) => (
           <motion.div
-            className="bg-card border border-violet-200/50 dark:border-violet-800/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
+            key={i}
             variants={item}
+            className="bg-card border border-purple-200/40 dark:border-purple-900/40 rounded-2xl p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
           >
-            <motion.div variants={iconVariants} className="mb-3">
-              <Mail className="w-8 h-8 text-violet-600 dark:text-violet-400" />
-            </motion.div>
-            <h2 className="text-xl font-semibold mb-2">Email Us</h2>
-            <p className="text-muted-foreground mb-3">For any general help</p>
-            <a
-              href="mailto:contact@gyanrexa.com"
-              className="text-violet-600 dark:text-violet-400 hover:underline"
-            >
-              contact@gyanrexa.com
-            </a>
-          </motion.div>
-
-          {/* Phone */}
-          <motion.div
-            className="bg-card border border-violet-200/50 dark:border-violet-800/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
-            variants={item}
-          >
-            <motion.div variants={iconVariants} className="mb-3">
-              <Phone className="w-8 h-8 text-violet-600 dark:text-violet-400" />
-            </motion.div>
-            <h2 className="text-xl font-semibold mb-2">Call Us</h2>
-            <p className="text-muted-foreground mb-3">Quick assistance</p>
-            <a
-              href="tel:+11234567890"
-              className="text-violet-600 dark:text-violet-400 hover:underline"
-            >
-              +1 (123) 456-7890
-            </a>
-          </motion.div>
-
-          {/* Address */}
-          <motion.div
-            className="bg-card border border-violet-200/50 dark:border-violet-800/50 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-300"
-            variants={item}
-          >
-            <motion.div variants={iconVariants} className="mb-3">
-              <MapPin className="w-8 h-8 text-violet-600 dark:text-violet-400" />
-            </motion.div>
-            <h2 className="text-xl font-semibold mb-2">Visit Us</h2>
-            <p className="text-muted-foreground">Our office</p>
-            <p className="mt-2">
-              GyanRexa BlogHouse
-              <br />
-              Goreswarer, Assam
-              <br />
-              India
-            </p>
-          </motion.div>
-        </motion.div>
-
-        {/* RIGHT SIDE FORM */}
-        <motion.div
-          className="bg-card border border-violet-200/50 dark:border-violet-800/50 rounded-2xl p-6 shadow-sm"
-          initial="hidden"
-          whileInView="show"
-          variants={item}
-          viewport={{ once: true, amount: 0.5 }}
-        >
-          <h2 className="text-2xl font-semibold flex items-center gap-2 mb-6 justify-center">
-            Send us a Message
-          </h2>
-
-          {/* Server action form */}
-          <form action={action} className="space-y-5">
-            {/* Name — InputGroup with inline icon addon */}
-            <motion.div variants={item}>
-              <Label className="block text-sm font-medium mb-2">Name</Label>
-
-              <InputGroup>
-                <InputGroupInput
-                  name="name"
-                  placeholder="Your name"
-                  aria-label="Name"
-                />
-                <InputGroupAddon>
-                  <User className="h-4 w-4 text-muted-foreground" />
-                </InputGroupAddon>
-              </InputGroup>
-            </motion.div>
-
-            {/* Email — InputGroup with inline icon addon */}
-            <motion.div variants={item}>
-              <Label className="block text-sm font-medium mb-2">Email</Label>
-
-              <InputGroup>
-                <InputGroupInput
-                  type="email"
-                  name="email"
-                  placeholder="your.email@example.com"
-                  aria-label="Email"
-                />
-                <InputGroupAddon>
-                  <Mail className="h-4 w-4 text-muted-foreground" />
-                </InputGroupAddon>
-              </InputGroup>
-            </motion.div>
-
-            {/* Message — InputGroupTextarea with block-end addon (send button) */}
-            <motion.div variants={item}>
-              <Label className="block text-sm font-medium mb-2">Message</Label>
-
-              <InputGroup>
-                <InputGroupTextarea
-                  name="message"
-                  placeholder="How may we help you?"
-                  rows={5}
-                  aria-label="Message"
-                />
-              </InputGroup>
-            </motion.div>
-
-            {/* Submit Button */}
-            <motion.div variants={item}>
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                type="submit"
-                className="w-full hover:cursor-pointer bg-violet-600 dark:bg-violet-700 text-white px-5 py-2.5 rounded-lg text-sm font-medium hover:bg-violet-700 dark:hover:bg-violet-600 transition-colors flex items-center justify-center gap-2 shadow-sm"
+            {/* Row: Icon + Title */}
+            <div className="flex items-center justify-start gap-4 mb-4">
+              <motion.div
+                variants={iconVariants}
+                className="p-3 rounded-full bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300"
               >
-                <Send className="w-4 h-4" />
-                Send Message
-              </motion.button>
-            </motion.div>
-          </form>
+                {block.icon}
+              </motion.div>
 
-          <motion.div
-            variants={item}
-            className="mt-6 pt-6 border-t border-border flex items-center text-sm text-muted-foreground"
-          >
-            <Clock className="w-4 h-4 mr-2" />
-            We typically respond within 24 hours
+              <h2 className="text-xl font-semibold tracking-tight">
+                {block.title}
+              </h2>
+            </div>
+
+            {/* Body */}
+            <p className="text-muted-foreground text-sm mb-2">
+              {block.desc}
+            </p>
+
+            {block.link && (
+              <a
+                href={block.link.href}
+                className="text-purple-600 dark:text-purple-400 font-medium hover:underline"
+              >
+                {block.link.label}
+              </a>
+            )}
+
+            {block.address && (
+              <p className="text-sm leading-relaxed">
+                {block.address}
+              </p>
+            )}
           </motion.div>
-        </motion.div>
-      </div>
+        ))}
+      </motion.div>
     </div>
   );
 }

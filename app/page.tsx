@@ -1,20 +1,18 @@
 import HomeSidebarServer from "@/components/custom/HomeSidebarServer";
-import PostCardsWrapper from "@/components/custom/PostCardsWrapper";
-import SubjectFilterClient from "@/components/custom/SubjectFilterClient";
+import SubjectFilteredPosts from "@/components/custom/SubjectFilteredPosts";
+import DefaultPostsWrapper from "@/components/custom/DefaultPostsWrapper";
 
 export default function HomePage() {
   return (
-    <>
-      <SubjectFilterClient/>
-
-      {/* Posts + Sidebar */}
-      <div className="grid grid-cols-1 lg:grid-cols-[2fr_1fr] gap-10 mt-2">
-          <PostCardsWrapper />
-
-        <aside className="lg:sticky lg:top-20 lg:self-start">
-          <HomeSidebarServer />
-        </aside>
+    <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_300px] gap-6">
+      <div className="min-w-0">
+        <SubjectFilteredPosts>
+          <DefaultPostsWrapper />
+        </SubjectFilteredPosts>
       </div>
-    </>
+      <aside className="lg:sticky lg:top-20 lg:self-start">
+        <HomeSidebarServer />
+      </aside>
+    </div>
   );
 }

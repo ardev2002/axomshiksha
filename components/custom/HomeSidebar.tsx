@@ -2,7 +2,14 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { Facebook, Twitter, Instagram } from "lucide-react";
+import {
+  Facebook,
+  Twitter,
+  Instagram,
+  Folder,
+  Mail,
+  Users,
+} from "lucide-react";
 
 // Define the type for trending posts
 
@@ -27,7 +34,9 @@ export default function ClientSidebar() {
       {/* Categories */}
       <Card className="rounded-2xl shadow-sm">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">📂 Categories</CardTitle>
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <Folder className="h-5 w-5 text-blue-500" /> Categories
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex flex-wrap gap-2">
@@ -48,7 +57,9 @@ export default function ClientSidebar() {
       {/* Newsletter Signup */}
       <Card className="rounded-2xl shadow-sm">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">📧 Newsletter</CardTitle>
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <Mail className="h-5 w-5 text-green-500" /> Newsletter
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-muted-foreground mb-3">
@@ -68,7 +79,9 @@ export default function ClientSidebar() {
       {/* Follow Us */}
       <Card className="rounded-2xl shadow-sm">
         <CardHeader>
-          <CardTitle className="text-lg font-semibold">🤝 Follow Us</CardTitle>
+          <CardTitle className="text-lg font-semibold flex items-center gap-2">
+            <Users className="h-5 w-5 text-purple-500" /> Follow Us
+          </CardTitle>
         </CardHeader>
         <CardContent className="flex items-center gap-4">
           <a href="#" className="text-muted-foreground hover:text-primary">

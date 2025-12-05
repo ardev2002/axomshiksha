@@ -24,9 +24,10 @@ export default function PaginationControls({
     <div className="flex items-center justify-center gap-4 mt-8">
       <Button
         variant="outline"
-        size="icon"
+        size="icon-sm"
         disabled={currentPage <= 1}
         onClick={() => goToPage(currentPage - 1)}
+        className="rounded-full"
       >
         <ChevronLeft className="h-4 w-4" />
       </Button>
@@ -37,8 +38,9 @@ export default function PaginationControls({
 
       <Button
         variant="outline"
-        size="icon"
+        size="icon-sm"
         disabled={currentPage >= totalPages}
+        className="rounded-full"
         onClick={() => goToPage(currentPage + 1)}
       >
         <ChevronRight className="h-4 w-4" />

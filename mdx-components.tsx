@@ -144,7 +144,7 @@ export function useMDXComponents(): MDXComponents {
 
     // Links
     a: ({ children, ...props }) => (
-      <a className="text-blue-500 hover:underline" {...props}>
+      <a className="text-blue-600 hover:underline" {...props}>
         {children}
       </a>
     ),
