@@ -132,7 +132,7 @@ function DailyQuizHero() {
           viewport={{ once: true }}
           transition={{ duration: 0.2, delay: 0.2 }}
         >
-          <Link href="/quiz">
+          <Link href="/daily-quiz">
             <Button
               size="lg"
               className="rounded-full hover:cursor-pointer px-8"
