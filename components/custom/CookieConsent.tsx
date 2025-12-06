@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import Link from "next/link";
 
 export default function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -30,7 +31,7 @@ export default function CookieConsent() {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: 50 }}
-          transition={{ duration: 0.4, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeInOut", delay: 3 }}
           className="fixed bottom-4 left-4 w-[90%] sm:w-[350px]
                      bg-background text-foreground p-4 rounded-lg border shadow-sm z-50
                      backdrop-blur-md border-border"
@@ -38,12 +39,13 @@ export default function CookieConsent() {
           <p className="text-sm leading-relaxed">
             We use cookies to enhance your browsing experience and show
             personalized content. By continuing, you agree to our{" "}
-            <a
+            <Link
+              target="_blank"
               href="/privacy"
               className="text-blue-500 underline hover:opacity-90 transition-opacity"
             >
               Privacy Policy
-            </a>
+            </Link>
             .
           </p>
 

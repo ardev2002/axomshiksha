@@ -8,7 +8,6 @@ import { SUBJECTS } from "@/utils/CONSTANT";
 import PostCardsOnSubject from "./PostCardsOnSubject";
 import { Database } from "@/utils/supabase/types";
 import { Button } from "../ui/button";
-
 export default function SubjectFilteredPosts({
   children,
 }: {
@@ -35,12 +34,12 @@ export default function SubjectFilteredPosts({
     <>
       {/* Tab Scroll Wrapper */}
       <div className="flex items-center gap-2 py-3 w-full">
-        {/* Left Arrow */}
+        {/* Left Arrow - hidden on mobile */}
         <Button
           size={"icon-sm"}
           variant={"ghost"}
           type="button"
-          className="p-1 disabled:opacity-30 hover:cursor-pointer"
+          className="p-1 disabled:opacity-30 hover:cursor-pointer hidden sm:block"
           onClick={scrollPrev}
         >
           <ChevronLeft size={18} />
@@ -49,7 +48,8 @@ export default function SubjectFilteredPosts({
         {/* CSS Grid Tabs */}
         <div
           ref={scrollRef}
-          className="grid grid-flow-col auto-cols-max gap-3 overflow-hidden flex-1"
+          className="grid grid-flow-col auto-cols-max gap-3 overflow-x-auto flex-1 scrollbar-hide touch-pan-x"
+          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {Object.values(SUBJECTS).map((subject) => {
             const isActive = activeSubject === subject;
@@ -80,12 +80,12 @@ export default function SubjectFilteredPosts({
           })}
         </div>
 
-        {/* Right Arrow */}
+        {/* Right Arrow - hidden on mobile */}
         <Button
           variant={"ghost"}
           size={"icon-sm"}
           type="button"
-          className="p-1 disabled:opacity-30 hover:cursor-pointer"
+          className="p-1 disabled:opacity-30 hover:cursor-pointer hidden sm:block"
           onClick={scrollNext}
         >
           <ChevronRight size={18} />

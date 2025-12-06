@@ -36,7 +36,7 @@ async function PostPageInner({
 
   return (
     <article className="mx-auto space-y-4">
-      <ViewTracker postId={post.id} />
+      {/* <ViewTracker postId={post.id} /> */}
 
       <header className="space-y-6">
         <h1 className="text-3xl md:text-4xl font-bold tracking-tight">

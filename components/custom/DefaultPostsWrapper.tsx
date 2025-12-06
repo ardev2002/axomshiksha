@@ -1,10 +1,8 @@
 import * as motion from "motion/react-client";
 import { getPaginatedPosts } from "@/utils/post/get/action";
 import PostCard from "./PostCard";
-import PaginationControls from "./PaginationControls";
-import { Suspense } from "react";
 export default async function DefaultPostsWrapper() {
-  const { posts, currentPage, totalPages } = await getPaginatedPosts({
+  const { posts } = await getPaginatedPosts({
     filters: { status: "published" },
   });
 
@@ -28,9 +26,6 @@ export default async function DefaultPostsWrapper() {
           ))}
         </div>
       )}
-      <Suspense fallback={null}>
-        <PaginationControls currentPage={currentPage} totalPages={totalPages} />
-      </Suspense>
     </div>
   );
 }
