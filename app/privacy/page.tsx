@@ -247,7 +247,7 @@ export default function PrivacyPolicyPage() {
         <address className="not-italic mb-4">
           AxomShiksha<br />
           Goreswar<br />
-          <a href="mailto:shiksha@axomshiksha.com" className="text-blue-500 hover:underline">shiksha@axomshiksha.com</a><br />
+          <a href="mailto:shikshaaxom@gmail.com" className="text-blue-500 hover:underline">shikshaaxom@gmail.com</a><br />
         </address>
       </div>
 

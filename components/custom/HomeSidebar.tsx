@@ -10,17 +10,19 @@ import {
   Mail,
   Users,
 } from "lucide-react";
+import Link from "next/link";
 
 // Define the type for trending posts
 
 export default function ClientSidebar() {
-  const categories = [
-    "Technology",
-    "Programming",
-    "Science",
-    "Education",
-    "Health",
-    "Lifestyle",
+  const tags = [
+    "tech",
+    "programming",
+    "science",
+    "gadgets",
+    "health",
+    "lifestyle",
+    "ai"
   ];
 
   const formAction = async (formData: FormData) => {
@@ -39,15 +41,18 @@ export default function ClientSidebar() {
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="flex flex-wrap gap-2">
-            {categories.map((cat) => (
+          <div className="flex flex-wrap gap-2 line-clamp-3">
+            {tags.map((tag) => (
               <Button
-                key={cat}
+                key={tag}
+                asChild
                 variant="outline"
                 size="sm"
-                className="text-xs rounded-full"
+                className="text-xs hover:cursor-pointer rounded-full"
               >
-                {cat}
+                <Link href={`/t/${tag}`}>
+                  #{tag}
+                </Link>
               </Button>
             ))}
           </div>
